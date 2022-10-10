@@ -5,10 +5,9 @@ const accountRouter = require("./routerAccounts");
 const { get } = require("./routerAccounts");
 const app = express();
 
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(accountRouter);
-
-app.use(cors({ origin: "*" }));
 
 app.get("/", (req, res) => {
   res.send("Hej från shoppinglist och candylist");
