@@ -1,7 +1,28 @@
 {
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "firebase": "^8.10.0"
-  }
+    "firebase": "^8.10.0",
+    "nodemon": "^2.0.20"
+  },
+  "name": "nodejs-firebase",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syed-ashraf123/nodejs-firebase.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/syed-ashraf123/nodejs-firebase/issues"
+  },
+  "homepage": "https://github.com/syed-ashraf123/nodejs-firebase#readme",
+  "description": ""
 }
