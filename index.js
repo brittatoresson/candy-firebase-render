@@ -6,8 +6,17 @@ const { get } = require("./routerAccounts");
 const app = express();
 
 app.use(express.json());
-app.use(cors());
 app.use(accountRouter);
+
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
+app.get("/", (req, res) => {
+  res.send("Hej från webbisserveris");
+});
 
 // GET CANDY
 app.get("/candy", async (req, res) => {
@@ -79,7 +88,7 @@ app.post("/update", async (req, res) => {
   const id = req.body.id;
   delete req.body.id;
   const data = req.body;
-  await User.doc(id).update(data);
+  await myFunctions.Accounts.doc(id).update(data);
   res.send({ msg: "User Added" });
 });
 
@@ -121,6 +130,24 @@ app.post("/shoppinglist", async (req, res) => {
   } catch (error) {}
 
   res.json({ item });
+});
+
+app.patch("/shoppinglist", async (req, res) => {
+  const { id, done, name } = req.body;
+  try {
+    const doc = await myFunctions.Shoppinglist.doc(id).get();
+    let items = doc.data().items;
+
+    await myFunctions.Shoppinglist.doc(id).update({ done });
+
+    // items.map(async (item) => {
+    //   // if (item.name == name) {
+    //   // doc.update(done);
+    //   // }
+    // });
+  } catch (error) {}
+
+  res.json({ hej: "hej" });
 });
 
 app.listen(4321, () => console.log("Up & RUnning *4000"));
