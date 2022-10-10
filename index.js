@@ -8,14 +8,10 @@ const app = express();
 app.use(express.json());
 app.use(accountRouter);
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+app.use(cors({ origin: "*" }));
 
 app.get("/", (req, res) => {
-  res.send("Hej från webbisserveris");
+  res.send("Hej från shoppinglist och candylist");
 });
 
 // GET CANDY
@@ -104,7 +100,6 @@ app.get("/flavors", async (req, res) => {
 app.get("/shoppinglist", async (req, res) => {
   const shoppingList = [];
   try {
-    // const query = await db.collection(myFunctions.Shoppinglist).get();
     const query = await myFunctions.Shoppinglist.get();
 
     query.forEach((doc) => {
@@ -119,35 +114,44 @@ app.get("/shoppinglist", async (req, res) => {
   res.json({ list: shoppingList });
 });
 
+//POST
 app.post("/shoppinglist", async (req, res) => {
-  const { id } = req.body;
-  let item;
-  try {
-    const ref = await myFunctions.Shoppinglist.doc(id);
-    const doc = await ref.get();
-    console.log(doc.data());
-    item = ref;
-  } catch (error) {}
+  const { done, name, amount } = req.body;
+  let item = {
+    done,
+    name,
+    amount,
+  };
 
-  res.json({ item });
+  await myFunctions.Shoppinglist.add({ item });
+
+  res.send(item);
 });
-
+//PATCH
 app.patch("/shoppinglist", async (req, res) => {
   const { id, done, name } = req.body;
   try {
-    const doc = await myFunctions.Shoppinglist.doc(id).get();
-    let items = doc.data().items;
-
     await myFunctions.Shoppinglist.doc(id).update({ done });
-
-    // items.map(async (item) => {
-    //   // if (item.name == name) {
-    //   // doc.update(done);
-    //   // }
-    // });
+    /// MED MAJA
+    const ref = await myFunctions.Shoppinglist.doc(id);
+    const doc = await myFunctions.Shoppinglist.doc(id).get();
+    let itemsList = doc.data().items;
+    let itemsIndex = itemsList.findIndex((i) => i.name === name);
+    itemsList[itemsIndex].done = done;
+    await ref.update({ items: itemsList });
   } catch (error) {}
 
-  res.json({ hej: "hej" });
+  res.json({ hej: "updaterad?" });
+});
+
+//DELETE
+app.delete("/item", async (req, res) => {
+  const { id } = req.body;
+  try {
+    await myFunctions.Shoppinglist.doc(id).delete();
+  } catch (error) {}
+
+  res.json({ hej: "delete?" });
 });
 
 app.listen(4321, () => console.log("Up & RUnning *4000"));
