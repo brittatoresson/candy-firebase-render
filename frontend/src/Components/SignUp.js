@@ -14,7 +14,8 @@ function SignUp(prop) {
   }
 
   async function addUser() {
-    fetch("http://localhost:4321/signup", {
+    fetch("https://candys.onrender.com/ignup", {
+      // fetch("http://localhost:4321/signup", {
       method: "POST",
       body: JSON.stringify(credentials),
       headers: {
@@ -25,7 +26,8 @@ function SignUp(prop) {
 
   async function login() {
     setErrorMsg("");
-    const response = await fetch("http://localhost:4321/login", {
+    const response = await fetch("https://candys.onrender.com/login", {
+      // const response = await fetch("http://localhost:4321/login", {
       method: "POST",
       body: JSON.stringify(credentials),
       headers: {
