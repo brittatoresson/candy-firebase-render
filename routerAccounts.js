@@ -3,6 +3,14 @@ const router = express.Router();
 const bcryptFunctions = require("./bcrypt");
 const myFunctions = require("./config");
 
+//GET ACCOUNTS; oklart om detta behövs
+router.get("/accounts", async (req, res) => {
+  const snapshot = await myFunctions.Accounts.get();
+  const accounts = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  res.send(accounts);
+});
+
+//SIGN UP
 router.post("/signup", async (req, res) => {
   const credentials = {
     username: req.body.username,
@@ -45,6 +53,7 @@ router.post("/signup", async (req, res) => {
 
   res.json(resObj);
 });
+
 //LOGIN
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
