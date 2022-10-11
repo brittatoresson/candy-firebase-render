@@ -53,6 +53,10 @@ function GetMucis() {
     }
   }
 
+  useEffect(() => {
+    setAmount(0);
+  }, [candyId]);
+
   return (
     <section className="candyList">
       {orderMsg}
@@ -63,9 +67,9 @@ function GetMucis() {
           <li>{candy.desc} </li>
           <li>
             <p onClick={() => getAmount(candy.id, "add")}>➕</p>
+            {candyId === candy.id ? <p>{amount} </p> : <p></p>}
             <p onClick={() => getAmount(candy.id, "sub")}>➖</p>
           </li>
-          {candyId === candy.id ? <li>{amount} </li> : null}
           <p onClick={() => orderProduct(candy)}> Add to cart </p>
         </ul>
       ))}

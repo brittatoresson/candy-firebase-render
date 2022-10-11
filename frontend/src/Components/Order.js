@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Billing from "./BillingModal";
 
 function Order() {
   const [order, setOrder] = useState();
@@ -7,8 +8,8 @@ function Order() {
 
   function getOrder() {
     try {
-      // fetch("https://candys.onrender.com/order")
-      fetch("http://localhost:4321/order")
+      fetch("https://candys.onrender.com/order")
+        // fetch("http://localhost:4321/order")
         .then((res) => res.json())
         .then((data) => setOrder(data));
     } catch (error) {}
@@ -16,8 +17,8 @@ function Order() {
 
   function deleteOrder(order) {
     try {
-      // fetch("https://candys.onrender.com/order", {
-      fetch("http://localhost:4321/order", {
+      fetch("https://candys.onrender.com/order", {
+        // fetch("http://localhost:4321/order", {
         method: "DELETE",
         body: JSON.stringify(order),
         headers: {
@@ -44,6 +45,7 @@ function Order() {
             </ul>
           ))
         : null}
+      <Billing />{" "}
     </section>
   );
 }

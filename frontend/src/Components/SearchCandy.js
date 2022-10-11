@@ -35,7 +35,8 @@ function SearchCandy() {
 
   function getFlavors() {
     try {
-      fetch("http://localhost:4321/flavors")
+      fetch("https://candys.onrender.com/flavors")
+        // fetch("http://localhost:4321/flavors")
         .then((res) => res.json())
         .then((data) => setFlavors(data[0].Flavor));
     } catch (error) {}

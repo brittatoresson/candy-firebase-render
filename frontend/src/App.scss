@@ -25,5 +25,27 @@ li {
   ul {
     display: flex;
     flex-direction: column;
+    li {
+      // display: flex;
+      // flex-direction: row;
+      p {
+        padding: 1px;
+      }
+    }
+    p {
+      cursor: pointer;
+    }
+  }
+}
+
+// BILLING
+
+.billingInfo {
+  display: flex;
+  flex-direction: column;
+  input,
+  button,
+  .radio {
+    width: 20vw;
   }
 }
