@@ -14,7 +14,7 @@ function SignUp(prop) {
   }
 
   async function addUser() {
-    fetch("https://candys.onrender.com/ignup", {
+    fetch("https://candys.onrender.com/signup", {
       // fetch("http://localhost:4321/signup", {
       method: "POST",
       body: JSON.stringify(credentials),
