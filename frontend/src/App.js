@@ -9,27 +9,20 @@ import SignUp from "./Components/SignUp";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [user, setUser] = useState(false);
-
-  function getCookie(cname) {
-    let name = cname + "=";
-    let ca = document.cookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == " ") {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
+  const [user, setUser] = useState();
 
   useEffect(() => {
-    getCookie("username");
-    console.log(user);
+    document.cookie.includes("username") ? setUser(true) : setUser(false);
   }, [user]);
+
+  //// MED MAJA
+  async function shoppingList(params) {
+    const res = fetch("https://shoppinglist-3lmh.onrender.com/shoppinglists");
+    const data = await (await res).json();
+    // console.log(data);
+  }
+
+  shoppingList();
 
   return (
     <BrowserRouter>

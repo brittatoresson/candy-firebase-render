@@ -7,6 +7,7 @@ function Order() {
 
   function getOrder() {
     try {
+      // fetch("https://candys.onrender.com/order")
       fetch("http://localhost:4321/order")
         .then((res) => res.json())
         .then((data) => setOrder(data));
@@ -15,6 +16,7 @@ function Order() {
 
   function deleteOrder(order) {
     try {
+      // fetch("https://candys.onrender.com/order", {
       fetch("http://localhost:4321/order", {
         method: "DELETE",
         body: JSON.stringify(order),

@@ -25,15 +25,22 @@ app.post("/candy", async (req, res) => {
   const serachItem = req.body.name;
   const resObj = {
     isMatch: false,
-    item: {},
+
+    itemArray: [],
   };
 
   const snapshot = await myFunctions.Candys.get();
   const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   list.map((i) => {
-    if (serachItem.toLowerCase() == i?.name?.toLowerCase()) {
+    if (
+      serachItem.toLowerCase() == i?.name?.toLowerCase() ||
+      serachItem.toLowerCase() == i?.flavor?.toLowerCase()
+    ) {
+      resObj.itemArray.push(i);
       resObj.isMatch = true;
-      resObj.item = i;
+      // resObj.item = i;
+    } else {
+      resObj.item = {};
     }
   });
   res.send(resObj);
@@ -56,8 +63,8 @@ app.delete("/order", async (req, res) => {
 app.post("/order", async (req, res) => {
   let orderObj = {
     inStock: false,
-    item: undefined,
-    amount: req.body.amount,
+    item: req.body.name,
+    amount: req.body.amount || 1,
   };
   const input = req.body.name;
   const snapshot = await myFunctions.Candys.get();
@@ -102,7 +109,6 @@ app.get("/shoppinglist", async (req, res) => {
     const query = await myFunctions.Shoppinglist.get();
 
     query.forEach((doc) => {
-      console.log(doc.data());
       shoppingList.push({
         id: doc.id,
         ...doc.data(),

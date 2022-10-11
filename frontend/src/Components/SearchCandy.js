@@ -6,21 +6,21 @@ export const UserContext = createContext();
 function SearchCandy() {
   const [item, setItem] = useState({});
   const [flavors, setFlavors] = useState();
-  const [flavor, setFlavor] = useState("");
   const [searchItem, setSearchItem] = useState({
     isMatch: undefined,
-    item: {},
+    itemArray: [],
   });
   const [resMesg, setResMes] = useState("");
-
   const [orderItem, setOrderItem] = useState("");
+  const [orderMsg, setOrderMsg] = useState("");
 
   function handleInput(e) {
     setItem({ ...item, [e.target.name]: e.target.value });
   }
   function searchCandy() {
     try {
-      fetch("http://localhost:4321/candy", {
+      fetch("https://candys.onrender.com/candy", {
+        // fetch("http://localhost:4321/candy", {
         method: "POST",
         body: JSON.stringify(item),
         headers: { "Content-Type": "application/json" },
@@ -41,6 +41,22 @@ function SearchCandy() {
     } catch (error) {}
   }
 
+  //SEND TO ORDER
+  async function orderProduct(item) {
+    const sendOrder = {
+      ...item,
+    };
+    await fetch("https://candys.onrender.com/order", {
+      // await fetch("http://localhost:4321/order", {
+      method: "POST",
+      body: JSON.stringify(sendOrder),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    setOrderMsg(`${item.name} is added to cart`);
+  }
+
   useEffect(() => {
     getFlavors();
   }, []);
@@ -53,20 +69,9 @@ function SearchCandy() {
         name="name"
         onChange={(e) => handleInput(e)}
       ></input>
-      <input
-        type="text"
-        placeholder="flavor"
-        name="flavor"
-        onChange={(e) => handleInput(e)}
-      ></input>
-      <input
-        type="number"
-        placeholder="amount"
-        name="amount"
-        onChange={(e) => handleInput(e)}
-      ></input>
       <button onClick={searchCandy}> Sök</button>
-      <select onChange={(e) => setFlavor(e.target.value)}>
+
+      <select onChange={(e) => setItem({ name: e.target.value })}>
         {flavors?.map((flavor, i) => (
           <option value={flavor} key={i}>
             {flavor}{" "}
@@ -78,13 +83,17 @@ function SearchCandy() {
       </UserContext.Provider>
 
       {searchItem.isMatch ? (
-        <section>
-          <p>{searchItem.item.name}</p>
-          <p>{searchItem.item.flavor}</p>
-        </section>
+        searchItem.itemArray.map((item, i) => (
+          <section key={i}>
+            <h3 onClick={() => orderProduct(item)}>{item.name}</h3>
+            <li>{item.flavor}</li>
+            <li>{item.desc}</li>
+          </section>
+        ))
       ) : (
         <p>{resMesg}</p>
       )}
+      <p>{orderMsg}</p>
     </section>
   );
 }

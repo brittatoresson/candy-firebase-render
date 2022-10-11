@@ -24,5 +24,6 @@
     "url": "https://github.com/syed-ashraf123/nodejs-firebase/issues"
   },
   "homepage": "https://github.com/syed-ashraf123/nodejs-firebase#readme",
+  "devDependencies": {},
   "description": ""
 }

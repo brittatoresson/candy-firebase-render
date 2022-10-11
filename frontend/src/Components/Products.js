@@ -8,7 +8,8 @@ function GetMucis() {
 
   function getData() {
     try {
-      fetch("http://localhost:4321/candy")
+      fetch("https://candys.onrender.com/candy")
+        // fetch("http://localhost:4321/candy")
         .then((res) => res.json())
         .then((data) => setMyCandyList(data));
     } catch (error) {}
@@ -19,7 +20,8 @@ function GetMucis() {
       ...item,
       amount,
     };
-    await fetch("http://localhost:4321/order", {
+    await fetch("https://candys.onrender.com/order", {
+      // await fetch("http://localhost:4321/order", {
       method: "POST",
       body: JSON.stringify(sendOrder),
       headers: {
