@@ -22,7 +22,9 @@ function App() {
     // console.log(data);
   }
 
-  shoppingList();
+  useEffect(() => {
+    shoppingList();
+  }, []);
 
   return (
     <BrowserRouter>

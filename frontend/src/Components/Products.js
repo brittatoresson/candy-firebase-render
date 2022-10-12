@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 
 function GetMucis() {
-  const [myCandyList, setMyCandyList] = useState([]);
+  const [myCandyList, setMyCandyList] = useState([
+    { name: "polka", desc: "god", flavor: "vanilla" },
+    { name: "polka", desc: "god", flavor: "vanilla" },
+  ]);
   const [amount, setAmount] = useState(0);
   const [candyId, setCandyId] = useState();
   const [orderMsg, setOrderMsg] = useState("");
@@ -58,21 +61,23 @@ function GetMucis() {
   }, [candyId]);
 
   return (
-    <section className="candyList">
+    <section className="productsView">
       {orderMsg}
-      {myCandyList.map((candy, i) => (
-        <ul key={i}>
-          <li>{candy.name} </li>
-          <li>{candy.flavor} </li>
-          <li>{candy.desc} </li>
-          <li>
-            <p onClick={() => getAmount(candy.id, "add")}>➕</p>
-            {candyId === candy.id ? <p>{amount} </p> : <p></p>}
-            <p onClick={() => getAmount(candy.id, "sub")}>➖</p>
-          </li>
-          <p onClick={() => orderProduct(candy)}> Add to cart </p>
-        </ul>
-      ))}
+      <section className="productsList">
+        {myCandyList.map((candy, i) => (
+          <ul key={i}>
+            <li>{candy.name} </li>
+            <li>Flavor: {candy.flavor} </li>
+            <li>About: {candy.desc} </li>
+            <li>
+              <p onClick={() => getAmount(candy.id, "add")}>⌃</p>
+              {candyId === candy.id ? <p>{amount} </p> : <p></p>}
+              <p onClick={() => getAmount(candy.id, "sub")}>⌵</p>
+            </li>
+            <p onClick={() => orderProduct(candy)}> Add to cart </p>
+          </ul>
+        ))}
+      </section>
     </section>
   );
 }

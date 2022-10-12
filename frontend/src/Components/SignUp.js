@@ -53,7 +53,10 @@ function SignUp(prop) {
   return (
     <section className="mainSignUp">
       {user ? (
-        <button onClick={() => logout()}> Logout</button>
+        <button onClick={() => logout()} id="logOutBtn">
+          {" "}
+          Logout
+        </button>
       ) : (
         <section className="signUpInput">
           <h3>Sign up</h3>

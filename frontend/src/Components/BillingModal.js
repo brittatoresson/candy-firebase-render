@@ -9,8 +9,8 @@ function Billing() {
   }
 
   function confirmPurchase(params) {
+    setItem({ ...item, payment: payment });
     console.log(item);
-    console.log(payment);
   }
 
   return (

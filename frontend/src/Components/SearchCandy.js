@@ -63,22 +63,23 @@ function SearchCandy() {
   }, []);
 
   return (
-    <section>
-      <input
-        type="text"
-        placeholder="candy"
-        name="name"
-        onChange={(e) => handleInput(e)}
-      ></input>
-      <button onClick={searchCandy}> Sök</button>
-
-      <select onChange={(e) => setItem({ name: e.target.value })}>
-        {flavors?.map((flavor, i) => (
-          <option value={flavor} key={i}>
-            {flavor}{" "}
-          </option>
-        ))}
-      </select>
+    <section className="searchCandy">
+      <section className="searchCandyInput">
+        <input
+          type="text"
+          placeholder="search candy"
+          name="name"
+          onChange={(e) => handleInput(e)}
+        ></input>
+        <select onChange={(e) => setItem({ name: e.target.value })}>
+          {flavors?.map((flavor, i) => (
+            <option value={flavor} key={i}>
+              {flavor}{" "}
+            </option>
+          ))}
+        </select>
+        <button onClick={searchCandy}> Sök</button>
+      </section>
       <UserContext.Provider value={orderItem}>
         {orderItem ? <Order /> : null}{" "}
       </UserContext.Provider>

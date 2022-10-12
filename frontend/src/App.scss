@@ -1,36 +1,101 @@
-.App {
+body {
   text-align: center;
+  background-image: url("https://images.unsplash.com/photo-1575224300306-1b8da36134ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80");
+  background-size: auto;
+  background-position-x: center;
+  color: rgb(132, 132, 132);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  // background-repeat: no-repeat;
+  // background-color: rgb(198, 61, 87);
+  // background-color: rgb(198, 61, 87);
 }
 
+ul {
+  padding: 1rem;
+}
 li {
   list-style: none;
+}
+
+button,
+input,
+select,
+.radio {
+  background-color: white;
+  color: rgb(198, 61, 87);
+  border: 1px solid lightcoral;
+  border-radius: 5px;
+  padding: 1rem;
+  outline: none;
+}
+button:hover {
+  background-color: lightcoral;
+  color: white;
+  // box-shadow: 1px 2px 2px rgb(171, 156, 156);
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+input:focus {
+  background-color: rgb(244, 244, 244);
+  box-shadow: inset 2px 2px 2px rgb(195, 109, 109);
+}
+
+header {
+  box-sizing: border-box;
+  background-color: white;
+  height: auto;
+
+  a {
+    color: rgb(198, 61, 87);
+    text-decoration: none;
+    padding: 1rem;
+  }
+  a:hover {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+}
+
+///Sign up, log in
+#logOutBtn {
+  display: flex;
 }
 
 .mainSignUp {
   text-align: center;
 }
-.signUpInput {
+.signUpInput,
+.order {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 1rem;
 }
-
-.candyList {
+.productsView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.productsList {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100vw;
-  justify-content: center;
+  background-color: white;
+  margin: 1rem;
+  width: 50vw;
   ul {
     display: flex;
     flex-direction: column;
     li {
-      // display: flex;
-      // flex-direction: row;
+      margin-bottom: 2px;
       p {
-        padding: 1px;
+        margin: 0;
       }
+    }
+    li:first-child {
+      font-weight: bold;
     }
     p {
       cursor: pointer;
@@ -38,8 +103,29 @@ li {
   }
 }
 
-// BILLING
+// Search Candy
 
+.searchCandy {
+  display: flex;
+  justify-content: center;
+  height: 50vh;
+  align-items: center;
+
+  .searchCandyInput {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+  }
+}
+
+// Order
+.orderLists {
+  background-color: white;
+  width: 10vw;
+  margin: 1rem;
+}
+
+// BILLING
 .billingInfo {
   display: flex;
   flex-direction: column;
@@ -47,5 +133,18 @@ li {
   button,
   .radio {
     width: 20vw;
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    box-shadow: none;
+    color: rgb(132, 132, 132);
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+    font-size: 14px;
+  }
+
+  button {
+    align-self: center;
+    width: 10vw;
   }
 }
